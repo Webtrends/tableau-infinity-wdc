@@ -72,11 +72,20 @@ module.exports = function(grunt) {
             name: 'Travis Deployment',
             email: 'noreply@travis-ci.org'
           },
-          repo: 'https://' + process.env.GH_TOKEN + '@github.com/Webtrends/tableau-infinity-wdc.git',
+          repo: 'https://' + process.env.GITHUB_ACCESS_TOKEN + '@github.com/Webtrends/tableau-infinity-wdc.git',
           message: 'Auto-deploy via Travis CI',
           silent: true
         },
         src: ['**']
+      }
+    },
+    release: {
+      options: {
+        npm: false, //default: true
+        github: {
+          repo: 'Webtrends/tableau-infinity-wdc', //put your user/repo here
+          accessTokenVar: 'GITHUB_ACCESS_TOKEN', //ENVIRONMENT VARIABLE that contains GitHub Access Token
+        }
       }
     }
   });
