@@ -267,6 +267,10 @@ var wdcw = window.wdcw || {};
    * - Trigger the data collection phase of the web data connector.
    */
   $(document).ready(function connectorDocumentReady() {
+    $('.input-daterange').datepicker({
+        format: "yyyy/mm/dd",
+        todayBtn: true
+    });
     $('form').submit(function connectorFormSubmitHandler(e) {
       var $fields = $('input, select, textarea').not('[type="password"],[type="submit"],[name="username"]'),
           $password = $('input[type="password"]'),

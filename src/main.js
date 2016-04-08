@@ -7,7 +7,9 @@ var module=module || {}
 
 ,
 window=window || {}
+,
 
+document=document || { location:{search:"" }}
 ,
 jQuery=jQuery || {}
 
@@ -333,8 +335,3 @@ module.exports=function($, tableau, wdcw) {
 ;
 // Set the global wdcw variable as expected.
 wdcw=module.exports(jQuery, tableau, wdcw);
-
-$('.input-daterange').datepicker({
-    format: "yyyy/mm/dd",
-    todayBtn: true
-});
