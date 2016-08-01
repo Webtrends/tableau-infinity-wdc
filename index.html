@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/tether/dist/css/tether.min.css">
     <link rel="stylesheet" type="text/css" href="src/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -38,26 +39,29 @@
     </div>
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">      &#9776;    </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">      &#9776;
+            </button>
             <a href="#" class="navbar-brand">Webtrends: Infinity Web Data Connector</a>
         </div>
     </div>
+    <h1 class="jumbotron-heading">
+        <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
+        <span>Connect to Webtrends: Infinity</span>
+    </h1>
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Connect to Webtrends: Infinity</h1>
-
             <form>
                 <p>
-                    <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" placeholder="Account GUID" />
-                    <label class="sr-only" for="AccountGUID">Account GUID</label>
+                    <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" required="" />
+                    <label for="AccountGUID">Account GUID</label>
                 </p>
                 <p>
-                    <input class="form-control" type="text" name="CollectionGUID" id="CollectionGUID" placeholder="Collection GUID" />
-                    <label class="sr-only" for="CollectionGUID">Collection GUID</label>
+                    <input class="form-control" type="text" name="CollectionGUID" id="CollectionGUID" required="" />
+                    <label for="CollectionGUID">Collection GUID</label>
                 </p>
                 <p>
-                    <input class="form-control" type="text" name="ReportGUID" id="ReportGUID" placeholder="Report GUID" />
-                    <label class="sr-only" for="ReportGUID">Report GUID</label>
+                    <input class="form-control" type="text" name="ReportGUID" id="ReportGUID" required="" />
+                    <label for="ReportGUID">Report GUID</label>
                 </p>
                 <p>
                     <div class="input-daterange input-group" id="datepicker">
@@ -68,12 +72,12 @@
                 </p>
                 <hr/>
                 <p>
-                    <input class="form-control" type="text" name="username" id="username" placeholder="Username" />
-                    <label class="sr-only" for="username">Username</label>
+                    <input class="form-control" type="text" name="username" id="username" required="" />
+                    <label for="username">Username</label>
                 </p>
                 <p>
-                    <input class="form-control" type="password" name="password" id="password" placeholder="Password or token" />
-                    <label class="sr-only" for="password">Password or token</label>
+                    <input class="form-control" type="password" name="password" id="password" required="" />
+                    <label for="password">Password or token</label>
                 </p>
                 <div>
                     <input type="submit" value="Connect" class="btn btn-lg btn-primary btn-block" />
