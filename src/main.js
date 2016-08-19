@@ -102,8 +102,7 @@ module.exports=function($, tableau, wdcw) {
    */
     wdcw.columnHeaders=function columnHeaders(registerHeaders) {
         // Access your input option like this to tweak data gathering logic.
-        var collectionGUID = this.getConnectionData()['CollectionGUID'];
-        var reportGUID = this.getConnectionData()['ReportGUID'];
+        var dataExportGUID = this.getConnectionData()['DataExportGUID'];
         var accountGUID = this.getConnectionData()['AccountGUID'];
         var beginDate = this.getConnectionData()['begin'];
         var endDate = this.getConnectionData()['end'];
@@ -113,8 +112,8 @@ module.exports=function($, tableau, wdcw) {
 
         // Do the same to retrieve your actual data.
         $.ajax( {
-            url: buildApiFrom('v1/account/'+accountGUID+'/report/'+reportGUID, {
-                server: apiServer
+            url: buildApiFrom('v1/account/' + accountGUID + '/dataexport/' + dataExportGUID + '/data', {
+              server: apiServer, begin: beginDate, end: beginDate
             }
             ), // Add basic authentication headers to your request like this. Note that
             // the password is encrypted when stored by Tableau; the username is not.
@@ -126,22 +125,21 @@ module.exports=function($, tableau, wdcw) {
             },
             crossDomain: true,
             success: function dataRetrieved(response) {
+
                 var processedColumns=[], dimensions, measures;
                 // If necessary, process the response from the API into the expected
                 // format (highlighted below):
-                $.each(response.dimension, function( index, value ) {
-                  processedColumns.push( {
-                      name: value.name, type: "string", // If your connector supports incremental extract refreshes, you
-                      // can indicate the column to use for refreshing like this:
-                      incrementalRefresh: false
-                  })
-                });
 
-                $.each(response.measure, function( index, value ) {
-                  processedColumns.push( {
-                      name: value.name, type: "float", // If your connector supports incremental extract refreshes, you
-                      // can indicate the column to use for refreshing like this:
-                      incrementalRefresh: false
+                var dimension = response.dimensions[0];
+
+                // Recursively collect each dimension from data.
+                processedColumns = recurseDim(dimension, processedColumns);
+
+                $.each(dimension.measures, function (index, value) {
+                  processedColumns.push({
+                    name: value.name, type: "float", // If your connector supports incremental extract refreshes, you
+                    // can indicate the column to use for refreshing like this:
+                    incrementalRefresh: false
                   })
                 });
 
@@ -191,8 +189,7 @@ module.exports=function($, tableau, wdcw) {
    */
     wdcw.tableData=function tableData(registerData, lastRecord) {
         // Access your input option like this to tweak data gathering logic.
-        var collectionGUID=this.getConnectionData()['CollectionGUID'];
-        var reportGUID=this.getConnectionData()['ReportGUID'];
+        var dataExportGUID = this.getConnectionData()['DataExportGUID'];
         var accountGUID=this.getConnectionData()['AccountGUID'];
         var beginDate = this.getConnectionData()['begin'];
         var endDate = this.getConnectionData()['end'];
@@ -203,8 +200,8 @@ module.exports=function($, tableau, wdcw) {
 
         // Do the same to retrieve your actual data.
         $.ajax( {
-            url: buildApiFrom('v1/account/'+accountGUID+'/collections/'+collectionGUID+'/reports/'+reportGUID+'/data', {
-                last: lastRecord, server: apiServer, begin: beginDate, end: endDate
+            url: buildApiFrom('v1/account/' + accountGUID + '/dataexport/' + dataExportGUID + '/data', {
+              last: lastRecord, server: apiServer, begin: beginDate, end: endDate
             }),
             xhrFields: {
               withCredentials: true
@@ -244,6 +241,25 @@ module.exports=function($, tableau, wdcw) {
     // You can write private methods for use above like this:
 
     /**
+     * Helper to drill into each dimension to find all report dimensions.
+     */
+    function recurseDim(dimension, columnHeaders) {
+      if (dimension) {
+        columnHeaders.push({
+          name: dimension.guid, type: "string", // If your connector supports incremental extract refreshes, you
+          // can indicate the column to use for refreshing like this:
+          incrementalRefresh: false
+        });
+
+        if(dimension.dimensions && dimension.dimensions[0]) {
+          recurseDim(dimension.dimensions[0], columnHeaders);
+        }
+      }
+
+      return columnHeaders;
+    }
+
+    /**
     * Helper to build the structure for the dimension
     **/
     function buildDimMeasureMap(dimension, dataMap, currentData) {
@@ -280,12 +296,14 @@ module.exports=function($, tableau, wdcw) {
     function buildApiFrom(path, opts) {
         opts=opts || {};
 
-        var server=opts.server || "https://api.webtrends.io/";
-        path=server + path;
+        var server = opts.server || "https://api.webtrends.io/";
+        path = server + path;
         if (opts.begin) {
           path += "?begin=" + opts.begin + "/00";
           path += "&end=" + opts.end + "/23";
         }
+        path += "&format=json";
+        path += "&timezone=Europe/London";
 
         return path;
     }
