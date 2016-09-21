@@ -23,14 +23,14 @@ body {
     height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-size: .75em;
-    background-color: rgb(33, 60, 82); 
-    background-image: 
-        radial-gradient(
-          circle at 20% 20%,
-          rgb(65, 90, 107),
-          rgb(33, 60, 82)
-        );
+    background-color: rgb(33, 60, 82);
+    background-image: radial-gradient(
+            circle at 20% 20%,
+            rgb(65, 90, 107),
+            rgb(33, 60, 82)
+    );
 }
+
 body,
 section.jumbotron {
     color: #fff;
@@ -56,7 +56,7 @@ h1.jumbotron-heading span {
 
 section.jumbotron hr {
     margin: 1em 0 3em;
-    border-top: 1px solid rgba(255,255,255,.16);
+    border-top: 1px solid rgba(255, 255, 255, .16);
 }
 
 form p label {
@@ -68,9 +68,9 @@ form p label {
  * From album.css
  */
 .navbar {
-    background-image: -webkit-linear-gradient(top,#319fd5 0,#3298c8 100%);
-    background-image: -o-linear-gradient(top,#319fd5 0,#3298c8 100%);
-    background-image: linear-gradient(to bottom,#319fd5 0,#3298c8 100%);
+    background-image: -webkit-linear-gradient(top, #319fd5 0, #3298c8 100%);
+    background-image: -o-linear-gradient(top, #319fd5 0, #3298c8 100%);
+    background-image: linear-gradient(to bottom, #319fd5 0, #3298c8 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF319FD5', endColorstr='#FF3298C8', GradientType=0);
     width: 100%;
@@ -78,8 +78,8 @@ form p label {
     min-height: 45px;
     margin: 0;
     padding: 0 1.2rem;
-    border-bottom: 1px solid rgba(0,0,0,.5);
-    text-shadow: 0 -1px 0 rgba(0,0,0,.45);
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
     border-radius: 0;
     display: flex;
     align-items: center;
@@ -92,15 +92,13 @@ form p label {
 
 .navbar-collapse .container-fluid {
     padding: 2rem 2.5rem;
-    box-shadow: inset 0 -10px 15px -10px rgba(0,0,0,0.4);
-    background: rgba(0,0,0,.3)
+    box-shadow: inset 0 -10px 15px -10px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, .3)
 }
-
 
 .navbar-collapse h4 {
     color: #95abbe;
 }
-
 
 .navbar-collapse p {
     font-size: 1rem;
@@ -118,7 +116,7 @@ form p label {
 
 .navbar .navbar-toggler {
     padding: .5rem 0;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.45);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
     outline: none;
     font-size: 1.75em;
 }
@@ -148,8 +146,8 @@ form p label {
 
 .jumbotron {
     padding: 3em 0;
-    background-color: rgba(0,0,0,.25);
-    box-shadow: 0px 0px 15px -2px rgba(0,0,0,.2) inset;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: 0px 0px 15px -2px rgba(0, 0, 0, .2) inset;
 }
 
 .jumbotron p:last-child {
@@ -164,6 +162,20 @@ form p {
     margin-bottom: 3em;
 }
 
+.select {
+    height: calc(3em);
+    color: #4d4d4d; !important;
+    background-color: #e5e8eb; !important;
+    border-radius: 3px;
+    border: 0;
+}
+
+.select-add-on {
+    background: transparent;
+    border-style: none;
+    z-index: -1;
+}
+
 input[type="text"],
 input[type="password"] {
     height: calc(3em);
@@ -171,43 +183,43 @@ input[type="password"] {
     background-color: #e5e8eb;
     border-radius: 3px;
     border: 0;
-    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
-    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
-    box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
 }
 
 input[type="text"] + label,
 input[type="password"] + label {
-  display: block;
-  padding: 0 10px;
-  margin-top: -2.2em;
-  transition: all .2s ease;
-  position: absolute;
+    display: block;
+    padding: 0 10px;
+    margin-top: -2.2em;
+    transition: all .2s ease;
+    position: absolute;
 }
 
 input[type="text"]:focus + label,
 input[type="text"]:valid + label,
 input[type="password"]:focus + label,
 input[type="password"]:valid + label {
-  -webkit-transform: translate(0, -2.4em);
-  -ms-transform: translate(0, -2.4em);
-  transform: translate(0, -2.4em);
-  color: rgba(255,255,255,.5);
-  padding: 0;
-  font-weight: 600;
+    -webkit-transform: translate(0, -2.4em);
+    -ms-transform: translate(0, -2.4em);
+    transform: translate(0, -2.4em);
+    color: rgba(255, 255, 255, .5);
+    padding: 0;
+    font-weight: 600;
 }
 
 input[type="submit"] {
     border: 1px solid #528f5d;
     background-color: #6aaa76;
-    background-image: -webkit-linear-gradient(top,#6aaa76 0,#528f5d 100%);
-    background-image: -o-linear-gradient(top,#6aaa76 0,#528f5d 100%);
-    background-image: linear-gradient(to bottom,#6aaa76 0,#528f5d 100%);
+    background-image: -webkit-linear-gradient(top, #6aaa76 0, #528f5d 100%);
+    background-image: -o-linear-gradient(top, #6aaa76 0, #528f5d 100%);
+    background-image: linear-gradient(to bottom, #6aaa76 0, #528f5d 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF6AAA76', endColorstr='#FF528F5D', GradientType=0);
-    box-shadow: inset 0 1px 0 0 rgba(255,255,255,.3),0 1px 0 0 rgba(0,0,0,.5);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, .3), 0 1px 0 0 rgba(0, 0, 0, .5);
     border-radius: 3px;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.45);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
     margin: 0 1px;
     font-size: 1.5em;
 }

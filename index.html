@@ -8,87 +8,528 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Webtrends: Infinity Web Data Connector</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/tether/dist/css/tether.min.css">
     <link rel="stylesheet" type="text/css" href="src/main.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <div class="navbar-collapse collapse inverse" id="navbar-header">
-        <div class="container-fluid">
-            <div class="about">
-                <h4>About</h4>
-                <p class="text-muted">Add some information about your web data connector, the service you're connecting to, your affiliation to it, or any other background context. As always, provide contact information or social links so people can report issues. </p>
-            </div>
-            <div class="social">
-                <h4>Contact</h4>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="mailto:#">Email</a>
-                    </li>
-                    <li>
-                        <a href="#">Follow on Twitter</a>
-                    </li>
-                    <li>
-                        <a href="#">Connect on LinkedIn</a>
-                    </li>
-                </ul>
-            </div>
+<div class="navbar-collapse collapse inverse" id="navbar-header">
+    <div class="container-fluid">
+        <div class="about">
+            <h4>About</h4>
+            <p class="text-muted">Add some information about your web data connector, the service you're connecting to,
+                your affiliation to it, or any other background context. As always, provide contact information or
+                social links so people can report issues. </p>
+        </div>
+        <div class="social">
+            <h4>Contact</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="mailto:#">Email</a>
+                </li>
+                <li>
+                    <a href="#">Follow on Twitter</a>
+                </li>
+                <li>
+                    <a href="#">Connect on LinkedIn</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">      &#9776;
-            </button>
-            <a href="#" class="navbar-brand">Webtrends: Infinity Web Data Connector</a>
-        </div>
+</div>
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">      &#9776;
+        </button>
+        <a href="#" class="navbar-brand">Webtrends: Infinity Web Data Connector</a>
     </div>
-    <h1 class="jumbotron-heading">
-        <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
-        <span>Connect to Webtrends: Infinity</span>
-    </h1>
-    <section class="jumbotron text-center">
-        <div class="container">
-            <form>
-                <p>
-                    <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" required="" />
-                    <label for="AccountGUID">Account GUID</label>
-                </p>
-                <p>
-                    <input class="form-control" type="text" name="CollectionGUID" id="CollectionGUID" required="" />
-                    <label for="CollectionGUID">Collection GUID</label>
-                </p>
-                <p>
-                    <input class="form-control" type="text" name="ReportGUID" id="ReportGUID" required="" />
-                    <label for="ReportGUID">Report GUID</label>
-                </p>
-                <p>
-                    <div class="input-daterange input-group" id="datepicker">
-                        <input type="text" class="input-sm form-control" name="begin" placeholder="yyyy/mm/dd" />
-                        <span class="input-group-addon">to</span>
-                        <input type="text" class="input-sm form-control" name="end" placeholder="yyyy/mm/dd" />
-                    </div>
-                </p>
-                <hr/>
-                <p>
-                    <input class="form-control" type="text" name="username" id="username" required="" />
-                    <label for="username">Username</label>
-                </p>
-                <p>
-                    <input class="form-control" type="password" name="password" id="password" required="" />
-                    <label for="password">Password or token</label>
-                </p>
-                <div>
-                    <input type="submit" value="Connect" class="btn btn-lg btn-primary btn-block" />
+</div>
+<h1 class="jumbotron-heading">
+    <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
+    <span>Connect to Webtrends: Infinity</span>
+</h1>
+<section class="jumbotron text-center">
+    <div class="container">
+        <form>
+            <p>
+                <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" required=""/>
+                <label for="AccountGUID">Account GUID</label>
+            </p>
+            <p>
+                <input class="form-control" type="text" name="DataExportGUID" id="DataExportGUID" required=""/>
+                <label for="DataExportGUID">Data Export GUID</label>
+            </p>
+            <p>
+
+            <div class="input-group" id="time">
+                <select id="daterange" name="daterange" class="input-sm form-control select" required=""
+                        onchange="hideDatePicker()">
+                    <option selected="true" disabled="true" value="">Date Selector</option>
+                    <option value="currentday">Current Day</option>
+                    <option value="currentweek">Current Week</option>
+                    <option value="currentmonth">Current Month</option>
+                    <option value="currentquarter">Current Quarter</option>
+                    <option value="currentyear">Current Year</option>
+                    <option value="previousday">Previous Day</option>
+                    <option value="previousweek">Previous Week</option>
+                    <option value="previousmonth">Previous Month</option>
+                    <option value="previousquarter">Previous Quarter</option>
+                    <option value="previousyear">Previous Year</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+
+                <span class="input-group-addon select-add-on"></span>
+
+                <select id="timezone" name="timezone" class="input-sm form-control select" required="">
+                    <option selected="true" disabled="true" value="">Timezone</option>
+                    <optgroup label="Standard">
+                        <option value="UTC">UTC (UTC +00:00)</option>
+                        <option value="UTC+0">UTC+0 (UTC +00:00)</option>
+                        <option value="GMT">GMT (UTC +00:00)</option>
+                    </optgroup>
+                    <optgroup label="Africa">
+                        <option value="Africa/Abidjan">Abidjan (UTC +00:00)</option>
+                        <option value="Africa/Accra">Accra (UTC +00:00)</option>
+                        <option value="Africa/Addis_Ababa">Addis Ababa (UTC +03:00)</option>
+                        <option value="Africa/Algiers">Algiers (UTC +01:00)</option>
+                        <option value="Africa/Asmera">Asmera (UTC +03:00)</option>
+                        <option value="Africa/Bamako">Bamako (UTC +00:00)</option>
+                        <option value="Africa/Bangui">Bangui (UTC +01:00)</option>
+                        <option value="Africa/Banjul">Banjul (UTC +00:00)</option>
+                        <option value="Africa/Bissau">Bissau (UTC +00:00)</option>
+                        <option value="Africa/Blantyre">Blantyre (UTC +02:00)</option>
+                        <option value="Africa/Brazzaville">Brazzaville (UTC +01:00)</option>
+                        <option value="Africa/Bujumbura">Bujumbura (UTC +02:00)</option>
+                        <option value="Africa/Cairo">Cairo (UTC +02:00)</option>
+                        <option value="Africa/Casablanca">Casablanca (UTC +00:00)</option>
+                        <option value="Africa/Ceuta">Ceuta (UTC +01:00)</option>
+                        <option value="Africa/Conakry">Conakry (UTC +00:00)</option>
+                        <option value="Africa/Dakar">Dakar (UTC +00:00)</option>
+                        <option value="Africa/Dar_es_Salaam">Dar es Salaam (UTC +03:00)</option>
+                        <option value="Africa/Djibouti">Djibouti (UTC +03:00)</option>
+                        <option value="Africa/Douala">Douala (UTC +01:00)</option>
+                        <option value="Africa/El_Aaiun">El Aaiun (UTC +00:00)</option>
+                        <option value="Africa/Freetown">Freetown (UTC +00:00)</option>
+                        <option value="Africa/Gaborone">Gaborone (UTC +02:00)</option>
+                        <option value="Africa/Harare">Harare (UTC +02:00)</option>
+                        <option value="Africa/Johannesburg">Johannesburg (UTC +02:00)</option>
+                        <option value="Africa/Kampala">Kampala (UTC +03:00)</option>
+                        <option value="Africa/Khartoum">Khartoum (UTC +03:00)</option>
+                        <option value="Africa/Kigali">Kigali (UTC +02:00)</option>
+                        <option value="Africa/Kinshasa">Kinshasa (UTC +01:00)</option>
+                        <option value="Africa/Lagos">Lagos (UTC +01:00)</option>
+                        <option value="Africa/Libreville">Libreville (UTC +01:00)</option>
+                        <option value="Africa/Lome">Lome (UTC +00:00)</option>
+                        <option value="Africa/Luanda">Luanda (UTC +01:00)</option>
+                        <option value="Africa/Lubumbashi">Lubumbashi (UTC +02:00)</option>
+                        <option value="Africa/Lusaka">Lusaka (UTC +02:00)</option>
+                        <option value="Africa/Malabo">Malabo (UTC +01:00)</option>
+                        <option value="Africa/Maputo">Maputo (UTC +02:00)</option>
+                        <option value="Africa/Maseru">Maseru (UTC +02:00)</option>
+                        <option value="Africa/Mbabane">Mbabane (UTC +02:00)</option>
+                        <option value="Africa/Mogadishu">Mogadishu (UTC +03:00)</option>
+                        <option value="Africa/Monrovia">Monrovia (UTC +00:00)</option>
+                        <option value="Africa/Nairobi">Nairobi (UTC +03:00)</option>
+                        <option value="Africa/Ndjamena">Ndjamena (UTC +01:00)</option>
+                        <option value="Africa/Niamey">Niamey (UTC +01:00)</option>
+                        <option value="Africa/Nouakchott">Nouakchott (UTC +00:00)</option>
+                        <option value="Africa/Ouagadougou">Ouagadougou (UTC +00:00)</option>
+                        <option value="Africa/Porto-Novo">Porto-Novo (UTC +01:00)</option>
+                        <option value="Africa/Sao_Tome">Sao Tome (UTC +00:00)</option>
+                        <option value="Africa/Timbuktu">Timbuktu (UTC +00:00)</option>
+                        <option value="Africa/Tripoli">Tripoli (UTC +02:00)</option>
+                        <option value="Africa/Tunis">Tunis (UTC +01:00)</option>
+                        <option value="Africa/Windhoek">Windhoek (UTC +01:00)</option>
+                    </optgroup>
+                    <optgroup label="America">
+                        <option value="America/Adak">Adak (UTC -10:00)</option>
+                        <option value="America/Anchorage">Anchorage (UTC -09:00)</option>
+                        <option value="America/Anguilla">Anguilla (UTC -04:00)</option>
+                        <option value="America/Antigua">Antigua (UTC -04:00)</option>
+                        <option value="America/Araguaina">Araguaina (UTC -03:00)</option>
+                        <option value="America/Aruba">Aruba (UTC -04:00)</option>
+                        <option value="America/Asuncion">Asuncion (UTC -04:00)</option>
+                        <option value="America/Barbados">Barbados (UTC -04:00)</option>
+                        <option value="America/Belem">Belem (UTC -03:00)</option>
+                        <option value="America/Belize">Belize (UTC -06:00)</option>
+                        <option value="America/Boa_Vista">Boa Vista (UTC -04:00)</option>
+                        <option value="America/Bogota">Bogota (UTC -05:00)</option>
+                        <option value="America/Boise">Boise (UTC -07:00)</option>
+                        <option value="America/Buenos_Aires">Buenos Aires (UTC -03:00)</option>
+                        <option value="America/Cambridge_Bay">Cambridge Bay (UTC -07:00)</option>
+                        <option value="America/Cancun">Cancun (UTC -06:00)</option>
+                        <option value="America/Caracas">Caracas (UTC -04:00)</option>
+                        <option value="America/Catamarca">Catamarca (UTC -03:00)</option>
+                        <option value="America/Cayenne">Cayenne (UTC -03:00)</option>
+                        <option value="America/Cayman">Cayman (UTC -05:00)</option>
+                        <option value="America/Chicago">Chicago (UTC -06:00)</option>
+                        <option value="America/Chihuahua">Chihuahua (UTC -07:00)</option>
+                        <option value="America/Cordoba">Cordoba (UTC -03:00)</option>
+                        <option value="America/Costa_Rica">Costa Rica (UTC -06:00)</option>
+                        <option value="America/Cuiaba">Cuiaba (UTC -04:00)</option>
+                        <option value="America/Curacao">Curacao (UTC -04:00)</option>
+                        <option value="America/Danmarkshavn">Danmarkshavn (UTC +00:00)</option>
+                        <option value="America/Dawson">Dawson (UTC -08:00)</option>
+                        <option value="America/Dawson_Creek">Dawson Creek (UTC -07:00)</option>
+                        <option value="America/Denver">Denver (UTC -07:00)</option>
+                        <option value="America/Detroit">Detroit (UTC -05:00)</option>
+                        <option value="America/Dominica">Dominica (UTC -04:00)</option>
+                        <option value="America/Edmonton">Edmonton (UTC -07:00)</option>
+                        <option value="America/Eirunepe">Eirunepe (UTC -05:00)</option>
+                        <option value="America/El_Salvador">El Salvador (UTC -06:00)</option>
+                        <option value="America/Fortaleza">Fortaleza (UTC -03:00)</option>
+                        <option value="America/Glace_Bay">Glace Bay (UTC -04:00)</option>
+                        <option value="America/Godthab">Godthab (UTC -03:00)</option>
+                        <option value="America/Goose_Bay">Goose Bay (UTC -04:00)</option>
+                        <option value="America/Grand_Turk">Grand Turk (UTC -05:00)</option>
+                        <option value="America/Grenada">Grenada (UTC -04:00)</option>
+                        <option value="America/Guadeloupe">Guadeloupe (UTC -04:00)</option>
+                        <option value="America/Guatemala">Guatemala (UTC -06:00)</option>
+                        <option value="America/Guayaquil">Guayaquil (UTC -05:00)</option>
+                        <option value="America/Guyana">Guyana (UTC -04:00)</option>
+                        <option value="America/Halifax">Halifax (UTC -04:00)</option>
+                        <option value="America/Havana">Havana (UTC -05:00)</option>
+                        <option value="America/Hermosillo">Hermosillo (UTC -07:00)</option>
+                        <option value="America/Indiana/Indianapolis">Indiana/Indianapolis (UTC -05:00)</option>
+                        <option value="America/Indiana/Knox">Indiana/Knox (UTC -05:00)</option>
+                        <option value="America/Indiana/Marengo">Indiana/Marengo (UTC -05:00)</option>
+                        <option value="America/Indiana/Vevay">Indiana/Vevay (UTC -05:00)</option>
+                        <option value="America/Indianapolis">Indianapolis (UTC -05:00)</option>
+                        <option value="America/Inuvik">Inuvik (UTC -07:00)</option>
+                        <option value="America/Iqaluit">Iqaluit (UTC -05:00)</option>
+                        <option value="America/Jamaica">Jamaica (UTC -05:00)</option>
+                        <option value="America/Jujuy">Jujuy (UTC -03:00)</option>
+                        <option value="America/Juneau">Juneau (UTC -09:00)</option>
+                        <option value="America/Kentucky/Louisville">Kentucky/Louisville (UTC -05:00)</option>
+                        <option value="America/Kentucky/Monticello">Kentucky/Monticello (UTC -05:00)</option>
+                        <option value="America/La_Paz">La Paz (UTC -04:00)</option>
+                        <option value="America/Lima">Lima (UTC -05:00)</option>
+                        <option value="America/Louisville">Louisville (UTC -05:00)</option>
+                        <option value="America/Maceio">Maceio (UTC -03:00)</option>
+                        <option value="America/Managua">Managua (UTC -06:00)</option>
+                        <option value="America/Manaus">Manaus (UTC -04:00)</option>
+                        <option value="America/Martinique">Martinique (UTC -04:00)</option>
+                        <option value="America/Mazatlan">Mazatlan (UTC -07:00)</option>
+                        <option value="America/Mendoza">Mendoza (UTC -03:00)</option>
+                        <option value="America/Menominee">Menominee (UTC -06:00)</option>
+                        <option value="America/Merida">Merida (UTC -06:00)</option>
+                        <option value="America/Mexico_City">Mexico City (UTC -06:00)</option>
+                        <option value="America/Miquelon">Miquelon (UTC -03:00)</option>
+                        <option value="America/Monterrey">Monterrey (UTC -06:00)</option>
+                        <option value="America/Montevideo">Montevideo (UTC -03:00)</option>
+                        <option value="America/Montreal">Montreal (UTC -05:00)</option>
+                        <option value="America/Montserrat">Montserrat (UTC -04:00)</option>
+                        <option value="America/Nassau">Nassau (UTC -05:00)</option>
+                        <option value="America/New_York">New York (UTC -05:00)</option>
+                        <option value="America/Nipigon">Nipigon (UTC -05:00)</option>
+                        <option value="America/Nome">Nome (UTC -09:00)</option>
+                        <option value="America/Noronha">Noronha (UTC -02:00)</option>
+                        <option value="America/North_Dakota/Center">North Dakota/Center (UTC -06:00)</option>
+                        <option value="America/Panama">Panama (UTC -05:00)</option>
+                        <option value="America/Pangnirtung">Pangnirtung (UTC -05:00)</option>
+                        <option value="America/Paramaribo">Paramaribo (UTC -03:00)</option>
+                        <option value="America/Phoenix">Phoenix (UTC -07:00)</option>
+                        <option value="America/Port-au-Prince">Port-au-Prince (UTC -05:00)</option>
+                        <option value="America/Port_of_Spain">Port of Spain (UTC -04:00)</option>
+                        <option value="America/Porto_Velho">Porto Velho (UTC -04:00)</option>
+                        <option value="America/Puerto_Rico">Puerto Rico (UTC -04:00)</option>
+                        <option value="America/Rainy_River">Rainy River (UTC -06:00)</option>
+                        <option value="America/Rankin_Inlet">Rankin Inlet (UTC -06:00)</option>
+                        <option value="America/Recife">Recife (UTC -03:00)</option>
+                        <option value="America/Regina">Regina (UTC -06:00)</option>
+                        <option value="America/Rio_Branco">Rio Branco (UTC -05:00)</option>
+                        <option value="America/Rosario">Rosario (UTC -03:00)</option>
+                        <option value="America/Santiago">Santiago (UTC -04:00)</option>
+                        <option value="America/Santo_Domingo">Santo Domingo (UTC -04:00)</option>
+                        <option value="America/Sao_Paulo">Sao Paulo (UTC -03:00)</option>
+                        <option value="America/Scoresbysund">Scoresbysund (UTC -01:00)</option>
+                        <option value="America/Shiprock">Shiprock (UTC -07:00)</option>
+                        <option value="America/St_Johns">St Johns (UTC -03:30)</option>
+                        <option value="America/St_Kitts">St Kitts (UTC -04:00)</option>
+                        <option value="America/St_Lucia">St Lucia (UTC -04:00)</option>
+                        <option value="America/St_Thomas">St Thomas (UTC -04:00)</option>
+                        <option value="America/St_Vincent">St Vincent (UTC -04:00)</option>
+                        <option value="America/Swift_Current">Swift Current (UTC -06:00)</option>
+                        <option value="America/Tegucigalpa">Tegucigalpa (UTC -06:00)</option>
+                        <option value="America/Thule">Thule (UTC -04:00)</option>
+                        <option value="America/Thunder_Bay">Thunder Bay (UTC -05:00)</option>
+                        <option value="America/Tijuana">Tijuana (UTC -08:00)</option>
+                        <option value="America/Tortola">Tortola (UTC -04:00)</option>
+                        <option value="America/Vancouver">Vancouver (UTC -08:00)</option>
+                        <option value="America/Whitehorse">Whitehorse (UTC -08:00)</option>
+                        <option value="America/Winnipeg">Winnipeg (UTC -06:00)</option>
+                        <option value="America/Yakutat">Yakutat (UTC -09:00)</option>
+                        <option value="America/Yellowknife">Yellowknife (UTC -07:00)</option>
+                    </optgroup>
+                    <optgroup label="Antarctica">
+                        <option value="Antarctica/Casey">Casey (UTC +08:00)</option>
+                        <option value="Antarctica/Davis">Davis (UTC +07:00)</option>
+                        <option value="Antarctica/DumontDUrville">DumontDUrville (UTC +10:00)</option>
+                        <option value="Antarctica/Mawson">Mawson (UTC +06:00)</option>
+                        <option value="Antarctica/McMurdo">McMurdo (UTC +12:00)</option>
+                        <option value="Antarctica/Palmer">Palmer (UTC -04:00)</option>
+                        <option value="Antarctica/South_Pole">South Pole (UTC +12:00)</option>
+                        <option value="Antarctica/Syowa">Syowa (UTC +03:00)</option>
+                        <option value="Antarctica/Vostok">Vostok (UTC +06:00)</option>
+                    </optgroup>
+                    <optgroup label="Arctic">
+                        <option value="Arctic/Longyearbyen">Longyearbyen (UTC +01:00)</option>
+                    </optgroup>
+                    <optgroup label="Asia">
+                        <option value="Asia/Aden">Aden (UTC +03:00)</option>
+                        <option value="Asia/Almaty">Almaty (UTC +06:00)</option>
+                        <option value="Asia/Amman">Amman (UTC +02:00)</option>
+                        <option value="Asia/Anadyr">Anadyr (UTC +12:00)</option>
+                        <option value="Asia/Aqtau">Aqtau (UTC +04:00)</option>
+                        <option value="Asia/Aqtobe">Aqtobe (UTC +05:00)</option>
+                        <option value="Asia/Ashgabat">Ashgabat (UTC +05:00)</option>
+                        <option value="Asia/Baghdad">Baghdad (UTC +03:00)</option>
+                        <option value="Asia/Bahrain">Bahrain (UTC +03:00)</option>
+                        <option value="Asia/Baku">Baku (UTC +04:00)</option>
+                        <option value="Asia/Bangkok">Bangkok (UTC +07:00)</option>
+                        <option value="Asia/Beirut">Beirut (UTC +02:00)</option>
+                        <option value="Asia/Bishkek">Bishkek (UTC +05:00)</option>
+                        <option value="Asia/Brunei">Brunei (UTC +08:00)</option>
+                        <option value="Asia/Calcutta">Calcutta (UTC +05:30)</option>
+                        <option value="Asia/Choibalsan">Choibalsan (UTC +09:00)</option>
+                        <option value="Asia/Chongqing">Chongqing (UTC +08:00)</option>
+                        <option value="Asia/Colombo">Colombo (UTC +06:00)</option>
+                        <option value="Asia/Damascus">Damascus (UTC +02:00)</option>
+                        <option value="Asia/Dhaka">Dhaka (UTC +06:00)</option>
+                        <option value="Asia/Dili">Dili (UTC +09:00)</option>
+                        <option value="Asia/Dubai">Dubai (UTC +04:00)</option>
+                        <option value="Asia/Dushanbe">Dushanbe (UTC +05:00)</option>
+                        <option value="Asia/Gaza">Gaza (UTC +02:00)</option>
+                        <option value="Asia/Harbin">Harbin (UTC +08:00)</option>
+                        <option value="Asia/Hong_Kong">Hong Kong (UTC +08:00)</option>
+                        <option value="Asia/Hovd">Hovd (UTC +07:00)</option>
+                        <option value="Asia/Irkutsk">Irkutsk (UTC +08:00)</option>
+                        <option value="Asia/Istanbul">Istanbul (UTC +02:00)</option>
+                        <option value="Asia/Jakarta">Jakarta (UTC +07:00)</option>
+                        <option value="Asia/Jayapura">Jayapura (UTC +09:00)</option>
+                        <option value="Asia/Jerusalem">Jerusalem (UTC +02:00)</option>
+                        <option value="Asia/Kabul">Kabul (UTC +04:30)</option>
+                        <option value="Asia/Kamchatka">Kamchatka (UTC +12:00)</option>
+                        <option value="Asia/Karachi">Karachi (UTC +05:00)</option>
+                        <option value="Asia/Kashgar">Kashgar (UTC +08:00)</option>
+                        <option value="Asia/Katmandu">Katmandu (UTC +05:45)</option>
+                        <option value="Asia/Krasnoyarsk">Krasnoyarsk (UTC +07:00)</option>
+                        <option value="Asia/Kuala_Lumpur">Kuala Lumpur (UTC +08:00)</option>
+                        <option value="Asia/Kuching">Kuching (UTC +08:00)</option>
+                        <option value="Asia/Kuwait">Kuwait (UTC +03:00)</option>
+                        <option value="Asia/Macao">Macao (UTC +08:00)</option>
+                        <option value="Asia/Macau">Macau (UTC +08:00)</option>
+                        <option value="Asia/Magadan">Magadan (UTC +11:00)</option>
+                        <option value="Asia/Makassar">Makassar (UTC +08:00)</option>
+                        <option value="Asia/Manila">Manila (UTC +08:00)</option>
+                        <option value="Asia/Muscat">Muscat (UTC +04:00)</option>
+                        <option value="Asia/Nicosia">Nicosia (UTC +02:00)</option>
+                        <option value="Asia/Novosibirsk">Novosibirsk (UTC +06:00)</option>
+                        <option value="Asia/Omsk">Omsk (UTC +06:00)</option>
+                        <option value="Asia/Oral">Oral (UTC +05:00)</option>
+                        <option value="Asia/Phnom_Penh">Phnom Penh (UTC +07:00)</option>
+                        <option value="Asia/Pontianak">Pontianak (UTC +07:00)</option>
+                        <option value="Asia/Pyongyang">Pyongyang (UTC +09:00)</option>
+                        <option value="Asia/Qyzylorda">Qyzylorda (UTC +06:00)</option>
+                        <option value="Asia/Qatar">Qatar (UTC +03:00)</option>
+                        <option value="Asia/Rangoon">Rangoon (UTC +06:30)</option>
+                        <option value="Asia/Riyadh">Riyadh (UTC +03:00)</option>
+                        <option value="Asia/Saigon">Saigon (UTC +07:00)</option>
+                        <option value="Asia/Sakhalin">Sakhalin (UTC +10:00)</option>
+                        <option value="Asia/Samarkand">Samarkand (UTC +05:00)</option>
+                        <option value="Asia/Seoul">Seoul (UTC +09:00)</option>
+                        <option value="Asia/Shanghai">Shanghai (UTC +08:00)</option>
+                        <option value="Asia/Singapore">Singapore (UTC +08:00)</option>
+                        <option value="Asia/Taipei">Taipei (UTC +08:00)</option>
+                        <option value="Asia/Tashkent">Tashkent (UTC +05:00)</option>
+                        <option value="Asia/Tbilisi">Tbilisi (UTC +04:00)</option>
+                        <option value="Asia/Tehran">Tehran (UTC +03:30)</option>
+                        <option value="Asia/Thimphu">Thimphu (UTC +06:00)</option>
+                        <option value="Asia/Tokyo">Tokyo (UTC +09:00)</option>
+                        <option value="Asia/Ujung_Pandang">Ujung Pandang (UTC +08:00)</option>
+                        <option value="Asia/Ulaanbaatar">Ulaanbaatar (UTC +08:00)</option>
+                        <option value="Asia/Urumqi">Urumqi (UTC +08:00)</option>
+                        <option value="Asia/Vientiane">Vientiane (UTC +07:00)</option>
+                        <option value="Asia/Vladivostok">Vladivostok (UTC +10:00)</option>
+                        <option value="Asia/Yakutsk">Yakutsk (UTC +09:00)</option>
+                        <option value="Asia/Yekaterinburg">Yekaterinburg (UTC +05:00)</option>
+                        <option value="Asia/Yerevan">Yerevan (UTC +04:00)</option>
+                    </optgroup>
+                    <optgroup label="Atlantic">
+                        <option value="Atlantic/Azores">Azores (UTC -01:00)</option>
+                        <option value="Atlantic/Bermuda">Bermuda (UTC -04:00)</option>
+                        <option value="Atlantic/Canary">Canary (UTC +00:00)</option>
+                        <option value="Atlantic/Cape_Verde">Cape Verde (UTC -01:00)</option>
+                        <option value="Atlantic/Faeroe">Faeroe (UTC +00:00)</option>
+                        <option value="Atlantic/Jan_Mayen">Jan Mayen (UTC +01:00)</option>
+                        <option value="Atlantic/Madeira">Madeira (UTC +00:00)</option>
+                        <option value="Atlantic/Reykjavik">Reykjavik (UTC +00:00)</option>
+                        <option value="Atlantic/South_Georgia">South Georgia (UTC -02:00)</option>
+                        <option value="Atlantic/St_Helena">St Helena (UTC +00:00)</option>
+                        <option value="Atlantic/Stanley">Stanley (UTC -04:00)</option>
+                    </optgroup>
+                    <optgroup label="Australia">
+                        <option value="Australia/Adelaide">Adelaide (UTC +09:30)</option>
+                        <option value="Australia/Brisbane">Brisbane (UTC +10:00)</option>
+                        <option value="Australia/Broken_Hill">Broken Hill (UTC +09:30)</option>
+                        <option value="Australia/Darwin">Darwin (UTC +09:30)</option>
+                        <option value="Australia/Hobart">Hobart (UTC +10:00)</option>
+                        <option value="Australia/Lindeman">Lindeman (UTC +10:00)</option>
+                        <option value="Australia/Lord_Howe">Lord Howe (UTC +10:30)</option>
+                        <option value="Australia/Melbourne">Melbourne (UTC +10:00)</option>
+                        <option value="Australia/Perth">Perth (UTC +08:00)</option>
+                        <option value="Australia/Sydney">Sydney (UTC +10:00)</option>
+                    </optgroup>
+                    <optgroup label="Europe">
+                        <option value="Europe/Amsterdam">Amsterdam (UTC +01:00)</option>
+                        <option value="Europe/Andorra">Andorra (UTC +01:00)</option>
+                        <option value="Europe/Athens">Athens (UTC +02:00)</option>
+                        <option value="Europe/Belfast">Belfast (UTC +00:00)</option>
+                        <option value="Europe/Belgrade">Belgrade (UTC +01:00)</option>
+                        <option value="Europe/Berlin">Berlin (UTC +01:00)</option>
+                        <option value="Europe/Bratislava">Bratislava (UTC +01:00)</option>
+                        <option value="Europe/Brussels">Brussels (UTC +01:00)</option>
+                        <option value="Europe/Bucharest">Bucharest (UTC +02:00)</option>
+                        <option value="Europe/Budapest">Budapest (UTC +01:00)</option>
+                        <option value="Europe/Chisinau">Chisinau (UTC +02:00)</option>
+                        <option value="Europe/Copenhagen">Copenhagen (UTC +01:00)</option>
+                        <option value="Europe/Dublin">Dublin (UTC +00:00)</option>
+                        <option value="Europe/Gibraltar">Gibraltar (UTC +01:00)</option>
+                        <option value="Europe/Helsinki">Helsinki (UTC +02:00)</option>
+                        <option value="Europe/Istanbul">Istanbul (UTC +02:00)</option>
+                        <option value="Europe/Kaliningrad">Kaliningrad (UTC +02:00)</option>
+                        <option value="Europe/Kiev">Kiev (UTC +02:00)</option>
+                        <option value="Europe/Lisbon">Lisbon (UTC +00:00)</option>
+                        <option value="Europe/Ljubljana">Ljubljana (UTC +01:00)</option>
+                        <option value="Europe/London">London (UTC +00:00)</option>
+                        <option value="Europe/Luxembourg">Luxembourg (UTC +01:00)</option>
+                        <option value="Europe/Madrid">Madrid (UTC +01:00)</option>
+                        <option value="Europe/Malta">Malta (UTC +01:00)</option>
+                        <option value="Europe/Minsk">Minsk (UTC +02:00)</option>
+                        <option value="Europe/Monaco">Monaco (UTC +01:00)</option>
+                        <option value="Europe/Moscow">Moscow (UTC +03:00)</option>
+                        <option value="Europe/Nicosia">Nicosia (UTC +02:00)</option>
+                        <option value="Europe/Oslo">Oslo (UTC +01:00)</option>
+                        <option value="Europe/Paris">Paris (UTC +01:00)</option>
+                        <option value="Europe/Prague">Prague (UTC +01:00)</option>
+                        <option value="Europe/Riga">Riga (UTC +02:00)</option>
+                        <option value="Europe/Rome">Rome (UTC +01:00)</option>
+                        <option value="Europe/Samara">Samara (UTC +04:00)</option>
+                        <option value="Europe/San_Marino">San Marino (UTC +01:00)</option>
+                        <option value="Europe/Sarajevo">Sarajevo (UTC +01:00)</option>
+                        <option value="Europe/Simferopol">Simferopol (UTC +02:00)</option>
+                        <option value="Europe/Skopje">Skopje (UTC +01:00)</option>
+                        <option value="Europe/Sofia">Sofia (UTC +02:00)</option>
+                        <option value="Europe/Stockholm">Stockholm (UTC +01:00)</option>
+                        <option value="Europe/Tallinn">Tallinn (UTC +02:00)</option>
+                        <option value="Europe/Tirane">Tirane (UTC +01:00)</option>
+                        <option value="Europe/Uzhgorod">Uzhgorod (UTC +02:00)</option>
+                        <option value="Europe/Vaduz">Vaduz (UTC +01:00)</option>
+                        <option value="Europe/Vatican">Vatican (UTC +01:00)</option>
+                        <option value="Europe/Vienna">Vienna (UTC +01:00)</option>
+                        <option value="Europe/Vilnius">Vilnius (UTC +02:00)</option>
+                        <option value="Europe/Warsaw">Warsaw (UTC +01:00)</option>
+                        <option value="Europe/Zagreb">Zagreb (UTC +01:00)</option>
+                        <option value="Europe/Zaporozhye">Zaporozhye (UTC +02:00)</option>
+                        <option value="Europe/Zurich">Zurich (UTC +01:00)</option>
+                    </optgroup>
+                    <optgroup label="Indian">
+                        <option value="Indian/Antananarivo">Antananarivo (UTC +03:00)</option>
+                        <option value="Indian/Chagos">Chagos (UTC +06:00)</option>
+                        <option value="Indian/Christmas">Christmas (UTC +07:00)</option>
+                        <option value="Indian/Cocos">Cocos (UTC +06:30)</option>
+                        <option value="Indian/Comoro">Comoro (UTC +03:00)</option>
+                        <option value="Indian/Kerguelen">Kerguelen (UTC +05:00)</option>
+                        <option value="Indian/Mahe">Mahe (UTC +04:00)</option>
+                        <option value="Indian/Maldives">Maldives (UTC +05:00)</option>
+                        <option value="Indian/Mauritius">Mauritius (UTC +04:00)</option>
+                        <option value="Indian/Mayotte">Mayotte (UTC +03:00)</option>
+                        <option value="Indian/Reunion">Reunion (UTC +04:00)</option>
+                    </optgroup>
+                    <optgroup label="Pacific">
+                        <option value="Pacific/Apia">Apia (UTC -11:00)</option>
+                        <option value="Pacific/Auckland">Auckland (UTC +12:00)</option>
+                        <option value="Pacific/Chatham">Chatham (UTC +12:45)</option>
+                        <option value="Pacific/Easter">Easter (UTC -06:00)</option>
+                        <option value="Pacific/Efate">Efate (UTC +11:00)</option>
+                        <option value="Pacific/Enderbury">Enderbury (UTC +13:00)</option>
+                        <option value="Pacific/Fakaofo">Fakaofo (UTC -10:00)</option>
+                        <option value="Pacific/Fiji">Fiji (UTC +12:00)</option>
+                        <option value="Pacific/Funafuti">Funafuti (UTC +12:00)</option>
+                        <option value="Pacific/Galapagos">Galapagos (UTC -06:00)</option>
+                        <option value="Pacific/Gambier">Gambier (UTC -09:00)</option>
+                        <option value="Pacific/Guadalcanal">Guadalcanal (UTC +11:00)</option>
+                        <option value="Pacific/Guam">Guam (UTC +10:00)</option>
+                        <option value="Pacific/Honolulu">Honolulu (UTC -10:00)</option>
+                        <option value="Pacific/Johnston">Johnston (UTC -10:00)</option>
+                        <option value="Pacific/Kiritimati">Kiritimati (UTC +14:00)</option>
+                        <option value="Pacific/Kosrae">Kosrae (UTC +11:00)</option>
+                        <option value="Pacific/Kwajalein">Kwajalein (UTC +12:00)</option>
+                        <option value="Pacific/Majuro">Majuro (UTC +12:00)</option>
+                        <option value="Pacific/Marquesas">Marquesas (UTC -09:30)</option>
+                        <option value="Pacific/Midway">Midway (UTC -11:00)</option>
+                        <option value="Pacific/Nauru">Nauru (UTC +12:00)</option>
+                        <option value="Pacific/Niue">Niue (UTC -11:00)</option>
+                        <option value="Pacific/Norfolk">Norfolk (UTC +11:30)</option>
+                        <option value="Pacific/Noumea">Noumea (UTC +11:00)</option>
+                        <option value="Pacific/Pago_Pago">Pago Pago (UTC -11:00)</option>
+                        <option value="Pacific/Palau">Palau (UTC +09:00)</option>
+                        <option value="Pacific/Pitcairn">Pitcairn (UTC -08:00)</option>
+                        <option value="Pacific/Ponape">Ponape (UTC +11:00)</option>
+                        <option value="Pacific/Port_Moresby">Port Moresby (UTC +10:00)</option>
+                        <option value="Pacific/Rarotonga">Rarotonga (UTC -10:00)</option>
+                        <option value="Pacific/Saipan">Saipan (UTC +10:00)</option>
+                        <option value="Pacific/Tahiti">Tahiti (UTC -10:00)</option>
+                        <option value="Pacific/Tarawa">Tarawa (UTC +12:00)</option>
+                        <option value="Pacific/Tongatapu">Tongatapu (UTC +13:00)</option>
+                        <option value="Pacific/Truk">Truk (UTC +10:00)</option>
+                        <option value="Pacific/Wake">Wake (UTC +12:00)</option>
+                        <option value="Pacific/Wallis">Wallis (UTC +12:00)</option>
+                        <option value="Pacific/Yap">Yap (UTC +10:00)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            </p>
+            <p>
+            <div class="collapse" id="datePickerCollapse" aria-expanded="false">
+                <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="input-sm form-control" name="begin" placeholder="yyyy/mm/dd"/>
+                    <span class="input-group-addon">to</span>
+                    <input type="text" class="input-sm form-control" name="end" placeholder="yyyy/mm/dd"/>
                 </div>
-            </form>
-        </div>
-    </section>
-    <script src="build/all.js">
-
-
-    </script>
+            </div>
+            </p>
+            <hr/>
+            <p>
+                <input class="form-control" type="text" name="username" id="username" required=""/>
+                <label for="username">Username</label>
+            </p>
+            <p>
+                <input class="form-control" type="password" name="password" id="password" required=""/>
+                <label for="password">Password or token</label>
+            </p>
+            <div>
+                <input type="submit" value="Connect" class="btn btn-lg btn-primary btn-block"/>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="build/all.js"></script>
+<script type="text/javascript">
+    function hideDatePicker() {
+        var dateRangeValue = $("#daterange").val();
+        var datePicker = $("#datePickerCollapse");
+        if (dateRangeValue == "custom") {
+            datePicker.collapse("show");
+        } else {
+            datePicker.collapse("hide");
+        }
+    }
+</script>
 </body>
 
 </html>
