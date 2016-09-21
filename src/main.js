@@ -302,44 +302,45 @@ module.exports = function ($, tableau, wdcw) {
   function buildApiFrom(path, opts) {
     opts = opts || {};
 
+    var server = opts.server || "https://api.webtrends.io/";
+    path = server + path;
+
+    // Only append date and format for actual data calls, not metadata calls.
+    if (opts.dateRange == "custom") {
+      if (opts.begin) {
+        path += "?begin=" + opts.begin + "/00";
+        path += "&end=" + opts.end + "/23";
+        path += "&format=json";
+        path += "&timezone=" + opts.timezone;
+      }
+    } else if (opts.dateRange) {
+      path += "?dateRange=" + opts.dateRange;
+      path += "&format=json";
+      path += "&timezone=" + opts.timezone;
     }
 
-    /**
-    * Helper function to get QS key
-    */
-    function getQSByKey(k) {
-      var p = new RegExp('\\b' + k + '\\b', 'gi');
-      var qs = document.location.search;
-      return qs.search(p) != -1 ? decodeURIComponent(qs.substr(qs.search(p) + k.length + 1).substr(0, qs.substr(qs.search(p) + k.length + 1).search(/(&|;|$)/))) : "";
-    }
+    tableau.log(path);
 
-    // Polyfill for btoa() in older browsers.
-    // @see https://raw.githubusercontent.com/davidchambers/Base64.js/master/base64.js
-    /* jshint ignore:start */
-    if (typeof btoa==='undefined') {
-        function btoa(input) {
-            var object=typeof exports !='undefined' ? exports: this, // #8: web workers
-            chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', str=String(input);
-            function InvalidCharacterError(message) {
-                this.message=message;
-            }
-            InvalidCharacterError.prototype=new Error;
-            InvalidCharacterError.prototype.name='InvalidCharacterError';
-            for ( // initialize result and counter
-            var block, charCode, idx=0, map=chars, output='';
-            // if the next str index does not exist:
-            //   change the mapping table to "="
-            //   check if d has no fractional digits
-            str.charAt(idx | 0) || (map='=', idx % 1);
-            // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-            output +=map.charAt(63 & block >> 8 - idx % 1 * 8)) {
-                charCode=str.charCodeAt(idx +=3 / 4);
-                if (charCode > 0xFF) {
-                    throw new InvalidCharacterError("'btoa' failed: The string to be encoded contains characters outside of the Latin1 range.");
-                }
-                block=block << 8 | charCode;
-            }
-            return output;
+    return path;
+  }
+
+  /**
+   * Helper function to get QS key
+   */
+  function getQSByKey(k) {
+    var p = new RegExp('\\b' + k + '\\b', 'gi');
+    var qs = document.location.search;
+    return qs.search(p) != -1 ? decodeURIComponent(qs.substr(qs.search(p) + k.length + 1).substr(0, qs.substr(qs.search(p) + k.length + 1).search(/(&|;|$)/))) : "";
+  }
+
+  // Polyfill for btoa() in older browsers.
+  // @see https://raw.githubusercontent.com/davidchambers/Base64.js/master/base64.js
+  /* jshint ignore:start */
+  if (typeof btoa === 'undefined') {
+    function btoa(input) {
+      var object = typeof exports != 'undefined' ? exports : this, // #8: web workers
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=', str = String(input);
+
       function InvalidCharacterError(message) {
         this.message = message;
       }
