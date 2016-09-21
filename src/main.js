@@ -319,7 +319,7 @@ module.exports = function ($, tableau, wdcw) {
       path += "&timezone=" + opts.timezone;
     }
 
-    tableau.log(path);
+    console.log(path);
 
     return path;
   }
