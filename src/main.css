@@ -54,6 +54,10 @@ h1.jumbotron-heading span {
     opacity: .7;
 }
 
+h2.jumbotron-sub-heading {
+    font-size: 12px;
+}
+
 section.jumbotron hr {
     margin: 1em 0 3em;
     border-top: 1px solid rgba(255, 255, 255, .16);

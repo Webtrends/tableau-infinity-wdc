@@ -50,10 +50,14 @@
 <h1 class="jumbotron-heading">
     <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
     <span>Connect to Webtrends: Infinity</span>
-</h1>  
+</h1> 
 <section class="jumbotron text-center">
     <div class="container">
         <form>
+            <p>
+                <input class="form-control" type="text" name="DataExportURL" id="DataExportURL" required=""/>
+                <label for="DataExportURL">Data Export URL</label>
+            </p>
             <p>
                 <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" required=""/>
                 <label for="AccountGUID">Account GUID</label>
@@ -67,8 +71,7 @@
             <div class="input-group" id="time">
                 <div class="select-wrapper">
                     <p class="select-triangle" aria-hidden="true">&#9662;</p>
-                    <select id="daterange" name="daterange" class="input-sm form-control select" required=""
-                            onchange="hideDatePicker()">
+                    <select id="daterange" name="daterange" class="input-sm form-control select" required="">
                         <option selected="true" disabled="true" value="">Date Selector</option>
                         <option value="currentday">Current Day</option>
                         <option value="currentweek">Current Week</option>
@@ -526,15 +529,37 @@
 </section>
 <script src="build/all.js"></script>
 <script type="text/javascript">
-    function hideDatePicker() {
-        var dateRangeValue = $("#daterange").val();
-        var datePicker = $("#datePickerCollapse");
-        if (dateRangeValue == "custom") {
-            datePicker.collapse("show");
-        } else {
-            datePicker.collapse("hide");
-        }
-    }
+    $(document).ready(function() {
+        $('#daterange').change(function() {
+            var dateRangeValue = $("#daterange").val();
+            var datePicker = $("#datePickerCollapse");
+            if (dateRangeValue == "custom") {
+                datePicker.collapse("show");
+            } else {
+                datePicker.collapse("hide");
+            }
+        });
+
+        $('#DataExportURL').on('paste', function () {
+            var element = $(this);
+            setTimeout(function () {
+                var url = element.val();
+
+                var credsReg = /account\/(.*?)\/dataexport\/(.*?)\//g;
+                var credsMatches = credsReg.exec(url);
+                if(credsMatches) {
+                    $('#AccountGUID').val(credsMatches[1]);
+                    $('#DataExportGUID').val(credsMatches[2]);
+                }
+
+                var timezoneReg = /timezone=([^&]*)/g;
+                var timezoneMatches = timezoneReg.exec(url);
+                if(timezoneMatches) {
+                    $('#timezone').val(timezoneMatches[1]);
+                }
+            }, 100);
+        });
+    });
 </script>
 </body>
 
