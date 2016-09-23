@@ -162,18 +162,37 @@ form p {
     margin-bottom: 3em;
 }
 
+.select-wrapper {
+    position: relative;
+}
+
 .select {
     height: calc(3em);
-    color: #4d4d4d; !important;
-    background-color: #e5e8eb; !important;
-    border-radius: 3px;
+    color: #4d4d4d; 
+    background-color: #e5e8eb; 
+    border-radius: 3px ! important;
     border: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
 }
 
 .select-add-on {
     background: transparent;
     border-style: none;
-    z-index: -1;
+}
+
+.select-triangle {
+    font-size: 20px;
+    color: #4d4d4d; 
+    text-align: right;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    z-index: 5;
+    pointer-events: none;
 }
 
 input[type="text"],

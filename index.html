@@ -50,7 +50,7 @@
 <h1 class="jumbotron-heading">
     <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
     <span>Connect to Webtrends: Infinity</span>
-</h1>
+</h1>  
 <section class="jumbotron text-center">
     <div class="container">
         <form>
@@ -65,25 +65,30 @@
             <p>
 
             <div class="input-group" id="time">
-                <select id="daterange" name="daterange" class="input-sm form-control select" required=""
-                        onchange="hideDatePicker()">
-                    <option selected="true" disabled="true" value="">Date Selector</option>
-                    <option value="currentday">Current Day</option>
-                    <option value="currentweek">Current Week</option>
-                    <option value="currentmonth">Current Month</option>
-                    <option value="currentquarter">Current Quarter</option>
-                    <option value="currentyear">Current Year</option>
-                    <option value="previousday">Previous Day</option>
-                    <option value="previousweek">Previous Week</option>
-                    <option value="previousmonth">Previous Month</option>
-                    <option value="previousquarter">Previous Quarter</option>
-                    <option value="previousyear">Previous Year</option>
-                    <option value="custom">Custom Range</option>
-                </select>
+                <div class="select-wrapper">
+                    <p class="select-triangle" aria-hidden="true">&#9662;</p>
+                    <select id="daterange" name="daterange" class="input-sm form-control select" required=""
+                            onchange="hideDatePicker()">
+                        <option selected="true" disabled="true" value="">Date Selector</option>
+                        <option value="currentday">Current Day</option>
+                        <option value="currentweek">Current Week</option>
+                        <option value="currentmonth">Current Month</option>
+                        <option value="currentquarter">Current Quarter</option>
+                        <option value="currentyear">Current Year</option>
+                        <option value="previousday">Previous Day</option>
+                        <option value="previousweek">Previous Week</option>
+                        <option value="previousmonth">Previous Month</option>
+                        <option value="previousquarter">Previous Quarter</option>
+                        <option value="previousyear">Previous Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
 
                 <span class="input-group-addon select-add-on"></span>
 
-                <select id="timezone" name="timezone" class="input-sm form-control select" required="">
+                <div class="select-wrapper">
+                    <p class="select-triangle" aria-hidden="true">&#9662;</p>
+                    <select id="timezone" name="timezone" class="input-sm form-control select" required="">
                     <option selected="true" disabled="true" value="">Timezone</option>
                     <optgroup label="Standard">
                         <option value="UTC">UTC (UTC +00:00)</option>
@@ -490,7 +495,8 @@
                         <option value="Pacific/Wallis">Wallis (UTC +12:00)</option>
                         <option value="Pacific/Yap">Yap (UTC +10:00)</option>
                     </optgroup>
-                </select>
+                 </select>
+                </div>
             </div>
 
             </p>
