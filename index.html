@@ -512,6 +512,22 @@
                 </div>
             </div>
             </p>
+            <div class="adv-hr" style="display: none">
+                <hr/>
+            </div>
+            <div class="collapse" id="advancedCollapse" aria-expanded="false">
+                <p>
+                    <input class="form-control " type="text" name="Limit" id="Limit" placeholder="[1-3000000]"/>
+                    <label for="Limit">Limit</label>
+                </p>
+                <p>                    
+                    <label class="checkbox-label"><input type="checkbox" name="Totals" id="Totals"/>Show Totals</label>
+                </p>
+            </div> 
+
+            <div class="more-options">
+                <span id="more-options-text">Show Advanced Options</span>
+            </div>
             <hr/>
             <p>
                 <input class="form-control" type="text" name="username" id="username" required=""/>
@@ -530,6 +546,10 @@
 <script src="build/all.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        
+        // Carry out UI Tasks
+
+        // When Date Range is set to Custom, show the date picker tools
         $('#daterange').change(function() {
             var dateRangeValue = $("#daterange").val();
             var datePicker = $("#datePickerCollapse");
@@ -540,6 +560,21 @@
             }
         });
 
+        // Show more options when button clicked.
+        $('#more-options-text').click(function() {
+            var advancedOptions = $("#advancedCollapse");
+            if(advancedOptions.attr("aria-expanded") == "true") {
+                advancedOptions.collapse("hide");
+                $('#more-options-text').html("Show Advanced Options");
+                $('.adv-hr').hide();
+            } else {
+                advancedOptions.collapse("show");
+                $('#more-options-text').html("Hide Advanced Options");
+                $('.adv-hr').show();
+            } 
+        });
+
+        // Fill in relavent form fields when URL is pasted into Data Export URL
         $('#DataExportURL').on('paste', function () {
             var element = $(this);
             setTimeout(function () {
@@ -558,7 +593,7 @@
                     $('#timezone').val(timezoneMatches[1]);
                 }
             }, 100);
-        });
+        });               
     });
 </script>
 </body>
