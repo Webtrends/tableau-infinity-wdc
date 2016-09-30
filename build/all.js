@@ -17752,7 +17752,11 @@ var wdcw = window.wdcw || {};
         var $this = $(this),
             name = $this.attr('name');
         if (name) {
-          data[name] = $this.val();
+          if($this.attr("type") == "checkbox") {
+            data[name] = $this.prop('checked');
+          } else {
+            data[name] = $this.val();  
+          }        
         }
         return this;
       });
@@ -17989,6 +17993,8 @@ module.exports = function ($, tableau, wdcw) {
     var dateRange = this.getConnectionData()['daterange'];
     var timezone = this.getConnectionData()['timezone'];
     var endDate = this.getConnectionData()['end'];
+    var limit = this.getConnectionData()['Limit'];
+    var totals = this.getConnectionData()['Totals'];
     var apiServer = getQSByKey('APIServer');
 
     var username = this.getUsername();
@@ -18000,7 +18006,7 @@ module.exports = function ($, tableau, wdcw) {
     function getTableDataAjax(_this) {
       var request = $.ajax({
         url: buildApiFrom('v1/account/' + accountGUID + '/dataexport/' + dataExportGUID + '/data', {
-          last: lastRecord, server: apiServer, begin: beginDate, end: endDate, dateRange: dateRange, timezone: timezone
+          last: lastRecord, server: apiServer, begin: beginDate, end: endDate, dateRange: dateRange, timezone: timezone, limit: limit, totals: totals
         }),
         xhrFields: {
           withCredentials: true
@@ -18095,16 +18101,27 @@ module.exports = function ($, tableau, wdcw) {
       if (opts.begin) {
         path += "?begin=" + opts.begin + "/00";
         path += "&end=" + opts.end + "/23";
-        path += "&format=json";
-        path += "&timezone=" + opts.timezone;
+        path = addExtraParams(path, opts);
       }
     } else if (opts.dateRange) {
       path += "?dateRange=" + opts.dateRange;
-      path += "&format=json";
-      path += "&timezone=" + opts.timezone;
+      path = addExtraParams(path, opts);
     }
 
     console.log(path);
+
+    return path;
+  }
+
+  function addExtraParams(path, opts) {
+    path += "&format=json";
+    path += "&timezone=" + opts.timezone;
+
+    if(opts.limit && opts.limit > 0 && opts.limit <= 3000000) {
+      path += "&limit=" + opts.limit
+    }
+
+    path += "&totals=" + opts.totals;
 
     return path;
   }
