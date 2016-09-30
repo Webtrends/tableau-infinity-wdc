@@ -50,10 +50,14 @@
 <h1 class="jumbotron-heading">
     <img src="src/img/sp-webtrends_logo_white@2x.png" alt="">
     <span>Connect to Webtrends: Infinity</span>
-</h1>
+</h1> 
 <section class="jumbotron text-center">
     <div class="container">
         <form>
+            <p>
+                <input class="form-control" type="text" name="DataExportURL" id="DataExportURL" required=""/>
+                <label for="DataExportURL">Data Export URL</label>
+            </p>
             <p>
                 <input class="form-control" type="text" name="AccountGUID" id="AccountGUID" required=""/>
                 <label for="AccountGUID">Account GUID</label>
@@ -65,25 +69,29 @@
             <p>
 
             <div class="input-group" id="time">
-                <select id="daterange" name="daterange" class="input-sm form-control select" required=""
-                        onchange="hideDatePicker()">
-                    <option selected="true" disabled="true" value="">Date Selector</option>
-                    <option value="currentday">Current Day</option>
-                    <option value="currentweek">Current Week</option>
-                    <option value="currentmonth">Current Month</option>
-                    <option value="currentquarter">Current Quarter</option>
-                    <option value="currentyear">Current Year</option>
-                    <option value="previousday">Previous Day</option>
-                    <option value="previousweek">Previous Week</option>
-                    <option value="previousmonth">Previous Month</option>
-                    <option value="previousquarter">Previous Quarter</option>
-                    <option value="previousyear">Previous Year</option>
-                    <option value="custom">Custom Range</option>
-                </select>
+                <div class="select-wrapper">
+                    <p class="select-triangle" aria-hidden="true">&#9662;</p>
+                    <select id="daterange" name="daterange" class="input-sm form-control select" required="">
+                        <option selected="true" disabled="true" value="">Date Selector</option>
+                        <option value="currentday">Current Day</option>
+                        <option value="currentweek">Current Week</option>
+                        <option value="currentmonth">Current Month</option>
+                        <option value="currentquarter">Current Quarter</option>
+                        <option value="currentyear">Current Year</option>
+                        <option value="previousday">Previous Day</option>
+                        <option value="previousweek">Previous Week</option>
+                        <option value="previousmonth">Previous Month</option>
+                        <option value="previousquarter">Previous Quarter</option>
+                        <option value="previousyear">Previous Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
 
                 <span class="input-group-addon select-add-on"></span>
 
-                <select id="timezone" name="timezone" class="input-sm form-control select" required="">
+                <div class="select-wrapper">
+                    <p class="select-triangle" aria-hidden="true">&#9662;</p>
+                    <select id="timezone" name="timezone" class="input-sm form-control select" required="">
                     <option selected="true" disabled="true" value="">Timezone</option>
                     <optgroup label="Standard">
                         <option value="UTC">UTC (UTC +00:00)</option>
@@ -490,7 +498,8 @@
                         <option value="Pacific/Wallis">Wallis (UTC +12:00)</option>
                         <option value="Pacific/Yap">Yap (UTC +10:00)</option>
                     </optgroup>
-                </select>
+                 </select>
+                </div>
             </div>
 
             </p>
@@ -503,6 +512,22 @@
                 </div>
             </div>
             </p>
+            <div class="adv-hr" style="display: none">
+                <hr/>
+            </div>
+            <div class="collapse" id="advancedCollapse" aria-expanded="false">
+                <p>
+                    <input class="form-control " type="text" name="Limit" id="Limit" placeholder="[1-3000000]"/>
+                    <label for="Limit">Limit</label>
+                </p>
+                <p>                    
+                    <label class="checkbox-label"><input type="checkbox" name="Totals" id="Totals"/>Show Totals</label>
+                </p>
+            </div> 
+
+            <div class="more-options">
+                <span id="more-options-text">Show Advanced Options</span>
+            </div>
             <hr/>
             <p>
                 <input class="form-control" type="text" name="username" id="username" required=""/>
@@ -520,15 +545,56 @@
 </section>
 <script src="build/all.js"></script>
 <script type="text/javascript">
-    function hideDatePicker() {
-        var dateRangeValue = $("#daterange").val();
-        var datePicker = $("#datePickerCollapse");
-        if (dateRangeValue == "custom") {
-            datePicker.collapse("show");
-        } else {
-            datePicker.collapse("hide");
-        }
-    }
+    $(document).ready(function() {
+        
+        // Carry out UI Tasks
+
+        // When Date Range is set to Custom, show the date picker tools
+        $('#daterange').change(function() {
+            var dateRangeValue = $("#daterange").val();
+            var datePicker = $("#datePickerCollapse");
+            if (dateRangeValue == "custom") {
+                datePicker.collapse("show");
+            } else {
+                datePicker.collapse("hide");
+            }
+        });
+
+        // Show more options when button clicked.
+        $('#more-options-text').click(function() {
+            var advancedOptions = $("#advancedCollapse");
+            if(advancedOptions.attr("aria-expanded") == "true") {
+                advancedOptions.collapse("hide");
+                $('#more-options-text').html("Show Advanced Options");
+                $('.adv-hr').hide();
+            } else {
+                advancedOptions.collapse("show");
+                $('#more-options-text').html("Hide Advanced Options");
+                $('.adv-hr').show();
+            } 
+        });
+
+        // Fill in relavent form fields when URL is pasted into Data Export URL
+        $('#DataExportURL').on('paste', function () {
+            var element = $(this);
+            setTimeout(function () {
+                var url = element.val();
+
+                var credsReg = /account\/(.*?)\/dataexport\/(.*?)\//g;
+                var credsMatches = credsReg.exec(url);
+                if(credsMatches) {
+                    $('#AccountGUID').val(credsMatches[1]);
+                    $('#DataExportGUID').val(credsMatches[2]);
+                }
+
+                var timezoneReg = /timezone=([^&]*)/g;
+                var timezoneMatches = timezoneReg.exec(url);
+                if(timezoneMatches) {
+                    $('#timezone').val(timezoneMatches[1]);
+                }
+            }, 100);
+        });               
+    });
 </script>
 </body>
 

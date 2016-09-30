@@ -54,6 +54,10 @@ h1.jumbotron-heading span {
     opacity: .7;
 }
 
+h2.jumbotron-sub-heading {
+    font-size: 12px;
+}
+
 section.jumbotron hr {
     margin: 1em 0 3em;
     border-top: 1px solid rgba(255, 255, 255, .16);
@@ -162,18 +166,54 @@ form p {
     margin-bottom: 3em;
 }
 
+.select-wrapper {
+    position: relative;
+}
+
 .select {
     height: calc(3em);
-    color: #4d4d4d; !important;
-    background-color: #e5e8eb; !important;
-    border-radius: 3px;
+    color: #4d4d4d; 
+    background-color: #e5e8eb; 
+    border-radius: 3px ! important;
     border: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
 }
 
 .select-add-on {
     background: transparent;
     border-style: none;
-    z-index: -1;
+}
+
+.select-triangle {
+    font-size: 20px;
+    color: #4d4d4d; 
+    text-align: right;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#Limit {
+    width: 200px;
+}
+
+.more-options {
+    margin-top: -18px;
+    text-align: right;
+}
+
+.more-options span {
+    cursor: pointer;
+}
+
+.more-options span:hover {
+    color: #e5e8eb;
 }
 
 input[type="text"],
@@ -234,4 +274,18 @@ input[type="submit"]:active:focus,
 .btn-lrg.btn-primary:active,
 .btn-lrg.btn-primary:active:focus {
     background: #487951 !important;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  margin-left: 5px;
+  vertical-align: bottom;
+  position: relative;
+  top: -3px;
+  *overflow: hidden;
+}
+
+.checkbox-label {
+  padding-left: 15px;
+  text-indent: -15px;
 }

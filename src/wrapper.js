@@ -284,7 +284,11 @@ var wdcw = window.wdcw || {};
         var $this = $(this),
             name = $this.attr('name');
         if (name) {
-          data[name] = $this.val();
+          if($this.attr("type") == "checkbox") {
+            data[name] = $this.prop('checked');
+          } else {
+            data[name] = $this.val();  
+          }        
         }
         return this;
       });
