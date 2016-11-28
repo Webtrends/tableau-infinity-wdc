@@ -5,14 +5,14 @@ This page describes how to import an Infinity Report into Tableau by making use 
  
 [![Tableau](https://buy.tableau.com/images/logo.png)](http://www.tableau.com/)       [![Webtrends Infinity](https://www.webtrends.com/wp-content/uploads/2016/05/Infinity-Mark-Animated-DotCom11.gif)](https://www.webtrends.com/products-solutions/big-data-platform/)
  
-Intro - What can it do?
+#Intro - What can it do?
  
 The Infinity WDC allows for reports made in Infinity to be hooked into Tableau.
 It works by using the Infinity API, so it supports all current API capabilities.
 It has a UI which builds out the API request within Tableau similar to how generator.webtrends.com built out the older Rest API.
 Once within Tableau, the data can be refreshed automatically, allowing for dashboards/reports to easily integrate with Webtrends data.
  
-Step 1 - Producing the Data Export URL
+##Step 1 - Producing the Data Export URL
  
      1. Open the report in Infinity that you wish to import into Tableau
      2. For "trends" reporting in Tableau, it helps to add a date/time dimension first (This is until the Infinity API can natively support trends reporting).
@@ -25,7 +25,7 @@ Step 1 - Producing the Data Export URL
           
  
  
-Step 2 - Entering the Data Export URL into the Infinity WDC in Tableau
+##Step 2 - Entering the Data Export URL into the Infinity WDC in Tableau
  
      1. Open Tableau.
      2. Select the Web Data Connector option under the "Connect" side panel.
@@ -42,7 +42,7 @@ Step 2 - Entering the Data Export URL into the Infinity WDC in Tableau
      9. Tableau should begin loading the data.
  
  
-Step 3 - Configuring Webtrends Data in Tableau
+##Step 3 - Configuring Webtrends Data in Tableau
  
      1. When the dimensions and measures have been successfully loaded, you'll see the option to "Update Now" and "Automatically Update"
      2. Click Update Now so we can first validate the collected data.
