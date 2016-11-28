@@ -3,7 +3,7 @@
 
 This page describes how to import an Infinity Report into Tableau by making use of the Tableau Infinity Web Data Connector (WDC) which was developed James Buckley, Peter Crossley and Evan Osherow.
  
-[![Tableau](https://buy.tableau.com/images/logo.png)](http://www.tableau.com/)   ---   [![Webtrends Infinity](https://www.webtrends.com/wp-content/uploads/2016/05/Infinity-Mark-Animated-DotCom11.gif)](https://www.webtrends.com/products-solutions/big-data-platform/)
+[![Tableau](https://buy.tableau.com/images/logo.png)](http://www.tableau.com/)       [![Webtrends Infinity](https://www.webtrends.com/wp-content/uploads/2016/05/Infinity-Mark-Animated-DotCom11.gif)](https://www.webtrends.com/products-solutions/big-data-platform/)
  
 Intro - What can it do?
  
