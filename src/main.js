@@ -308,18 +308,20 @@ module.exports = function ($, tableau, wdcw) {
     path = server + path;
 
     // Only append date and format for actual data calls, not metadata calls.
-    if (opts.dateRange == "custom") {
+    if (opts.dateRange == "custom" || opts.dateRange == "latest") {
       if (opts.begin) {
         path += "?begin=" + opts.begin + "/00";
-        path += "&end=" + opts.end + "/23";
+        if(opts.dateRange == "latest") {
+          path += "&end=latest";
+        } else {
+          path += "&end=" + opts.end + "/23";
+        }
         path = addExtraParams(path, opts);
       }
     } else if (opts.dateRange) {
       path += "?dateRange=" + opts.dateRange;
       path = addExtraParams(path, opts);
     }
-
-    console.log(path);
 
     return path;
   }
