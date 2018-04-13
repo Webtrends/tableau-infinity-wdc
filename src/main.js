@@ -308,10 +308,14 @@ module.exports = function ($, tableau, wdcw) {
     path = server + path;
 
     // Only append date and format for actual data calls, not metadata calls.
-    if (opts.dateRange == "custom") {
+    if (opts.dateRange == "custom" || opts.dateRange == "latest") {
       if (opts.begin) {
         path += "?begin=" + opts.begin + "/00";
-        path += "&end=" + opts.end + "/23";
+        if(opts.dateRange == "latest") {
+          path += "&end=latest";
+        } else {
+          path += "&end=" + opts.end + "/23";
+        }
         path = addExtraParams(path, opts);
       }
     } else if (opts.dateRange) {
@@ -319,19 +323,13 @@ module.exports = function ($, tableau, wdcw) {
       path = addExtraParams(path, opts);
     }
 
-    console.log(path);
-
     return path;
   }
 
   function addExtraParams(path, opts) {
     path += "&format=json";
     path += "&timezone=" + opts.timezone;
-
-    if(opts.limit && opts.limit > 0 && opts.limit <= 3000000) {
-      path += "&limit=" + opts.limit
-    }
-
+    path += "&limit=" + opts.limit;
     path += "&totals=" + opts.totals;
 
     return path;
