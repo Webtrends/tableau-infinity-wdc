@@ -329,11 +329,7 @@ module.exports = function ($, tableau, wdcw) {
   function addExtraParams(path, opts) {
     path += "&format=json";
     path += "&timezone=" + opts.timezone;
-
-    if(opts.limit && opts.limit > 0 && opts.limit <= 3000000) {
-      path += "&limit=" + opts.limit
-    }
-
+    path += "&limit=" + opts.limit;
     path += "&totals=" + opts.totals;
 
     return path;
