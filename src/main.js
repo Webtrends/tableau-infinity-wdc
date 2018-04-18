@@ -204,7 +204,7 @@ module.exports = function ($, tableau, wdcw) {
     var dateRange = this.getConnectionData()['daterange'];
     var timezone = this.getConnectionData()['timezone'];
     var endDate = this.getConnectionData()['end'];
-    var limit = this.getConnectionData()['Limit'];
+    var limit = this.getConnectionData()['Limit'] || "-";
     var totals = this.getConnectionData()['Totals'];
     var apiServer = getQSByKey('APIServer');
 
@@ -327,7 +327,7 @@ module.exports = function ($, tableau, wdcw) {
   function addExtraParams(path, opts) {
     path += "&format=json";
     path += "&timezone=" + opts.timezone;
-	path += "&limit=" + opts.limit
+    path += "&limit=" + opts.limit
     path += "&totals=" + opts.totals;
 
     return path;
