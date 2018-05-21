@@ -86,6 +86,7 @@ Once within Tableau, the data can be refreshed automatically, allowing for dashb
                         <option value="previousmonth">Previous Month</option>
                         <option value="previousquarter">Previous Quarter</option>
                         <option value="previousyear">Previous Year</option>
+                        <option value="latest">Custom to Latest</option>
                         <option value="custom">Custom Range</option>
                     </select>
                 </div>
@@ -509,9 +510,10 @@ Once within Tableau, the data can be refreshed automatically, allowing for dashb
             <p>
             <div class="collapse" id="datePickerCollapse" aria-expanded="false">
                 <div class="input-daterange input-group" id="datepicker">
-                    <input type="text" class="input-sm form-control" name="begin" placeholder="yyyy/mm/dd"/>
+                    <input type="text" id="datePicker-begin" class="input-sm form-control" name="begin" placeholder="yyyy/mm/dd"/>
                     <span class="input-group-addon">to</span>
-                    <input type="text" class="input-sm form-control" name="end" placeholder="yyyy/mm/dd"/>
+                    <input type="text" id="datePicker-end" class="input-sm form-control" name="end" placeholder="yyyy/mm/dd"/>
+                    <input type="text" id="datePicker-latest" class="input-sm form-control" name="latest" value="Latest" readonly/>
                 </div>
             </div>
             </p>
@@ -551,13 +553,19 @@ Once within Tableau, the data can be refreshed automatically, allowing for dashb
     $(document).ready(function() {
         
         // Carry out UI Tasks
+        
+        // Clear "Latest" datepicker event listeners.
+        $('#datePicker-latest').unbind();
 
         // When Date Range is set to Custom, show the date picker tools
         $('#daterange').change(function() {
             var dateRangeValue = $("#daterange").val();
             var datePicker = $("#datePickerCollapse");
-            if (dateRangeValue == "custom") {
+            if (dateRangeValue == "custom" || dateRangeValue == "latest") {
                 datePicker.collapse("show");
+                var isLatest = dateRangeValue == "latest";
+                $('#datePicker-end').toggle(!isLatest);
+                $('#datePicker-latest').toggle(isLatest);
             } else {
                 datePicker.collapse("hide");
             }
